@@ -13,18 +13,18 @@ spec:
       labels:
         name: cluster-dns-operator
     spec:
-      containers:
-        - name: cluster-dns-operator
-          image: openshift/origin-cluster-dns-operator:latest
-          command:
-          - cluster-dns-operator
-          imagePullPolicy: IfNotPresent
-          terminationGracePeriodSeconds: 2
-          env:
-            - name: WATCH_NAMESPACE
-              valueFrom:
-                fieldRef:
-                  fieldPath: metadata.namespace
-            - name: OPERATOR_NAME
-              value: "cluster-dns-operator"
       serviceAccountName: cluster-dns-operator
+      restartPolicy: Always
+      dnsPolicy: Default
+      containers:
+      - name: cluster-dns-operator
+        image: openshift/origin-cluster-dns-operator:latest
+        command:
+        - cluster-dns-operator
+        env:
+        - name: WATCH_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: OPERATOR_NAME
+          value: "cluster-dns-operator"

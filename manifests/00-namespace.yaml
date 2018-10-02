@@ -1,4 +1,6 @@
 kind: Namespace
 apiVersion: v1
 metadata:
-    name: openshift-cluster-dns-operator
+  name: openshift-cluster-dns-operator
+  annotations:
+    openshift.io/node-selector: ""
